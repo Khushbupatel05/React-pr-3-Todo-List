@@ -23,7 +23,7 @@ const TodoList = () => {
     setText("");
   };
 
- 
+
   const markTaskComplete = (id) => {
     const updatedTask = task.map((t) =>
       t.id === id ? { ...t, iscompleted: true } : t
@@ -39,6 +39,11 @@ const TodoList = () => {
     setFilterTasks(updated);
   }, [task, filter]);
 
+  const handleInputChange = (e) => {
+    setText(e.target.value);
+  };
+
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-purple-100 ">
       <div className="bg-white shadow-2xl rounded-2xl w-full max-w-xl ">
@@ -49,9 +54,9 @@ const TodoList = () => {
         <div className="p-4">
           <div className="rounded-2xl shadow-xl -translate-y-24 bg-white  p-4 ">
             <input
-              ref={inputRef}
-              onChange={(e) => setText(e.target.value)}
               type="text"
+              ref={inputRef}
+              onChange={handleInputChange}
               className="w-full px-4 py-2 border  border-gray-300   rounded-md focus:outline-none"
               placeholder="Enter Any Task..."
             />
@@ -84,7 +89,7 @@ const TodoList = () => {
             </button>
           </div>
 
-         
+
           <Table tasks={filterTasks} markTaskComplete={markTaskComplete} />
         </div>
       </div>
